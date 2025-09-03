@@ -15,12 +15,14 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(cookieParser());
-app.use(
-  cors({
-    origin: 'http://localhost:5173', // frontend origin
-    credentials: true,
-  })
-);
+app.use(cors({
+  origin: [
+    "http://localhost:5173", // for local dev
+    "https://smartcart-frontend-kwrw.onrender.com" // your deployed frontend
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
 
 // Mount admin routes
 const adminRoutes = require('./routes/admin');
